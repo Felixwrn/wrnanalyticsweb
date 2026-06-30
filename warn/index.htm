@@ -1,274 +1,262 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WRN WARN | Coming Soon</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            -webkit-font-smoothing:antialiased;
-        }
+<title>WRN WARN | Coming Soon</title>
 
-        body{
-            font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-            background:#000;
-            color:#fff;
-            overflow:hidden;
-            height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            position:relative;
-            text-align:center;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+}
 
-        /* Hintergrund */
-        .background{
-            position:absolute;
-            inset:0;
-            overflow:hidden;
-        }
+body{
+    background:#000;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    overflow:hidden;
+}
 
-        .glow{
-            position:absolute;
-            width:900px;
-            height:900px;
-            left:50%;
-            top:50%;
-            transform:translate(-50%,-50%);
-            background:radial-gradient(circle,
-                    rgba(255,59,48,.22) 0%,
-                    rgba(255,59,48,.10) 25%,
-                    rgba(255,59,48,0) 70%);
-            animation:pulse 7s ease-in-out infinite;
-        }
+.glow{
+    position:fixed;
+    width:700px;
+    height:700px;
+    background:radial-gradient(circle,
+        rgba(255,59,48,.35),
+        transparent 70%);
+    filter:blur(40px);
+    animation:pulse 6s infinite ease-in-out;
+}
 
-        @keyframes pulse{
-            0%,100%{
-                transform:translate(-50%,-50%) scale(1);
-            }
-            50%{
-                transform:translate(-50%,-50%) scale(1.12);
-            }
-        }
+@keyframes pulse{
+    0%,100%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.2);
+    }
+}
 
-        .content{
-            position:relative;
-            z-index:2;
-            max-width:1000px;
-            padding:20px;
-        }
+.container{
+    position:relative;
+    z-index:10;
+    text-align:center;
+    padding:30px;
+    max-width:900px;
+}
 
-        .badge{
-            display:inline-block;
-            padding:8px 20px;
-            border-radius:999px;
-            background:rgba(255,255,255,.08);
-            border:1px solid rgba(255,255,255,.1);
-            backdrop-filter:blur(20px);
-            color:#ff453a;
-            font-size:13px;
-            font-weight:700;
-            letter-spacing:1.5px;
-            text-transform:uppercase;
-            margin-bottom:28px;
-        }
+.badge{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:50px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.1);
+    color:#ff453a;
+    margin-bottom:30px;
+}
 
-        h1{
-            font-size:clamp(54px,7vw,92px);
-            font-weight:700;
-            letter-spacing:-3px;
-            margin-bottom:20px;
-            background:linear-gradient(#fff,#bdbdc2);
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-        }
+h1{
+    font-size:70px;
+    margin-bottom:15px;
+    letter-spacing:-2px;
+}
 
-        .subtitle{
-            font-size:clamp(20px,2.5vw,28px);
-            color:#d2d2d7;
-            margin-bottom:20px;
-            font-weight:600;
-        }
+.subtitle{
+    color:#9f9fa6;
+    font-size:22px;
+    margin-bottom:60px;
+}
 
-        .description{
-            max-width:760px;
-            margin:auto;
-            color:#8e8e93;
-            line-height:1.7;
-            font-size:19px;
-        }
+.countdown{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+}
 
-        .cards{
-            margin-top:60px;
-            display:flex;
-            justify-content:center;
-            flex-wrap:wrap;
-            gap:24px;
-        }
+.box{
+    width:140px;
+    padding:25px;
+    border-radius:22px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
+}
 
-        .card{
-            width:250px;
-            padding:28px;
-            border-radius:24px;
-            background:rgba(255,255,255,.05);
-            border:1px solid rgba(255,255,255,.08);
-            backdrop-filter:blur(20px);
-            transition:.35s;
-            animation:float 6s ease-in-out infinite;
-        }
+.number{
+    font-size:52px;
+    font-weight:700;
+}
 
-        .card:nth-child(2){
-            animation-delay:1s;
-        }
+.label{
+    margin-top:8px;
+    color:#8e8e93;
+    text-transform:uppercase;
+    font-size:13px;
+    letter-spacing:2px;
+}
 
-        .card:nth-child(3){
-            animation-delay:2s;
-        }
+.footer{
+    margin-top:70px;
+    color:#6e6e73;
+}
 
-        .card:hover{
-            transform:translateY(-10px);
-            border-color:rgba(255,69,58,.45);
-            box-shadow:0 0 40px rgba(255,69,58,.18);
-        }
+@media(max-width:700px){
 
-        .icon{
-            font-size:48px;
-            margin-bottom:18px;
-        }
+h1{
+font-size:52px;
+}
 
-        .card h3{
-            font-size:22px;
-            margin-bottom:10px;
-        }
+.box{
+width:120px;
+}
 
-        .card p{
-            color:#9b9ba1;
-            font-size:15px;
-            line-height:1.5;
-        }
+.number{
+font-size:42px;
+}
 
-        @keyframes float{
-            0%,100%{
-                transform:translateY(0px);
-            }
-            50%{
-                transform:translateY(-10px);
-            }
-        }
+.subtitle{
+font-size:18px;
+}
 
-        .release{
-            margin-top:55px;
-            color:#f5f5f7;
-            font-size:22px;
-            font-weight:600;
-        }
-
-        .footer{
-            position:absolute;
-            bottom:28px;
-            color:#5f5f64;
-            font-size:13px;
-            letter-spacing:.4px;
-            z-index:2;
-        }
-
-        @media(max-width:700px){
-
-            h1{
-                font-size:58px;
-            }
-
-            .subtitle{
-                font-size:22px;
-            }
-
-            .description{
-                font-size:17px;
-            }
-
-            .cards{
-                margin-top:40px;
-            }
-
-            .card{
-                width:100%;
-                max-width:320px;
-            }
-
-        }
-
-    </style>
+}
+</style>
 
 </head>
+
 <body>
 
-<div class="background">
-    <div class="glow"></div>
+<div class="glow"></div>
+
+<div class="container">
+
+<div class="badge">
+Geplant für Q4 2026
 </div>
 
-<div class="content">
+<h1>WRN WARN.</h1>
 
-    <div class="badge">
-        Geplant für Q4 2026
-    </div>
+<div class="subtitle">
+Die moderne Warn-App für Deutschland.
+</div>
 
-    <h1>WRN WARN.</h1>
+<div class="countdown">
 
-    <div class="subtitle">
-        Die moderne Warn-App für Deutschland.
-    </div>
+<div class="box">
+<div class="number" id="days">--</div>
+<div class="label">Tage</div>
+</div>
 
-    <div class="description">
-        Offizielle Warnungen für Unwetter, Hochwasser,
-        Bevölkerungsschutz und Erdbeben – schnell,
-        übersichtlich und zuverlässig in einer einzigen App.
-    </div>
+<div class="box">
+<div class="number" id="hours">--</div>
+<div class="label">Stunden</div>
+</div>
 
-    <div class="cards">
+<div class="box">
+<div class="number" id="minutes">--</div>
+<div class="label">Minuten</div>
+</div>
 
-        <div class="card">
-            <div class="icon">🌩️</div>
-            <h3>Unwetter</h3>
-            <p>
-                Aktuelle Wetterwarnungen
-                aus offiziellen Quellen.
-            </p>
-        </div>
-
-        <div class="card">
-            <div class="icon">🌊</div>
-            <h3>Hochwasser</h3>
-            <p>
-                Informationen zu
-                Hochwasserlagen in Deutschland.
-            </p>
-        </div>
-
-        <div class="card">
-            <div class="icon">🌍</div>
-            <h3>Erdbeben</h3>
-            <p>
-                Aktuelle Erdbebenereignisse
-                und wichtige Informationen.
-            </p>
-        </div>
-
-    </div>
-
-    <div class="release">
-        Veröffentlichung geplant für <strong>Q4 2026</strong>
-    </div>
+<div class="box">
+<div class="number" id="seconds">--</div>
+<div class="label">Sekunden</div>
+</div>
 
 </div>
 
 <div class="footer">
-    © 2026 WRN. Alle Rechte vorbehalten.
+© 2026 WRN. Alle Rechte vorbehalten.
 </div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "DEINE_API_KEY",
+
+authDomain: "DEIN_PROJEKT.firebaseapp.com",
+
+projectId: "DEIN_PROJEKT",
+
+storageBucket: "DEIN_PROJEKT.appspot.com",
+
+messagingSenderId: "123456789",
+
+appId: "DEINE_APP_ID"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let releaseDate;
+
+async function loadCountdown(){
+
+const snapshot = await getDoc(doc(db,"website","countdown"));
+
+if(snapshot.exists()){
+
+releaseDate = snapshot.data().releaseDate.toDate();
+
+startCountdown();
+
+}else{
+
+console.log("Countdown nicht gefunden.");
+
+}
+
+}
+
+function startCountdown(){
+
+setInterval(()=>{
+
+const now = new Date();
+
+const distance = releaseDate-now;
+
+if(distance<=0){
+
+document.getElementById("days").textContent="0";
+document.getElementById("hours").textContent="0";
+document.getElementById("minutes").textContent="0";
+document.getElementById("seconds").textContent="0";
+
+return;
+
+}
+
+const days=Math.floor(distance/(1000*60*60*24));
+const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+const minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+const seconds=Math.floor((distance%(1000*60))/1000);
+
+document.getElementById("days").textContent=days;
+document.getElementById("hours").textContent=hours;
+document.getElementById("minutes").textContent=minutes;
+document.getElementById("seconds").textContent=seconds;
+
+},1000);
+
+}
+
+loadCountdown();
+
+</script>
 
 </body>
 </html>

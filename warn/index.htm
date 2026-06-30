@@ -3,259 +3,217 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>WRN WARN | Coming Soon</title>
+<title>WRN | Coming Soon</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-}
-
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-    background:#000;
-    color:#fff;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    overflow:hidden;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+background:#000;
+color:#fff;
+overflow-x:hidden;
 }
-
+.bg{
+position:fixed;
+inset:0;
+background:#000;
+z-index:-2;
+}
 .glow{
-    position:fixed;
-    width:700px;
-    height:700px;
-    background:radial-gradient(circle,
-        rgba(255,59,48,.35),
-        transparent 70%);
-    filter:blur(40px);
-    animation:pulse 6s infinite ease-in-out;
+position:absolute;
+left:50%;
+top:35%;
+width:900px;
+height:900px;
+transform:translate(-50%,-50%);
+background:radial-gradient(circle,rgba(255,59,48,.20),transparent 70%);
+filter:blur(70px);
+animation:pulse 8s ease-in-out infinite;
 }
-
 @keyframes pulse{
-    0%,100%{
-        transform:scale(1);
-    }
-    50%{
-        transform:scale(1.2);
-    }
+0%,100%{transform:translate(-50%,-50%) scale(1)}
+50%{transform:translate(-50%,-50%) scale(1.15)}
 }
-
-.container{
-    position:relative;
-    z-index:10;
-    text-align:center;
-    padding:30px;
-    max-width:900px;
+nav{
+position:fixed;
+top:0;
+left:0;
+right:0;
+height:70px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 30px;
+background:rgba(0,0,0,.45);
+backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(255,255,255,.06);
 }
-
+nav a{color:#bbb;text-decoration:none;margin-left:20px}
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:120px 20px 60px;
+}
 .badge{
-    display:inline-block;
-    padding:8px 18px;
-    border-radius:50px;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.1);
-    color:#ff453a;
-    margin-bottom:30px;
+display:inline-block;
+padding:8px 16px;
+border-radius:999px;
+border:1px solid rgba(255,255,255,.08);
+background:rgba(255,255,255,.05);
+color:#ff6b60;
+margin-bottom:25px;
 }
-
 h1{
-    font-size:70px;
-    margin-bottom:15px;
-    letter-spacing:-2px;
+font-size:clamp(72px,10vw,140px);
+letter-spacing:-5px;
+background:linear-gradient(#fff,#bcbcbc);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
-
 .subtitle{
-    color:#9f9fa6;
-    font-size:22px;
-    margin-bottom:60px;
+margin-top:20px;
+font-size:clamp(20px,3vw,28px);
+color:#aaa;
+max-width:700px;
+margin-inline:auto;
+line-height:1.6;
 }
-
 .countdown{
-    display:flex;
-    justify-content:center;
-    gap:25px;
-    flex-wrap:wrap;
+margin-top:60px;
+display:grid;
+grid-template-columns:repeat(4,150px);
+gap:18px;
+justify-content:center;
 }
-
 .box{
-    width:140px;
-    padding:25px;
-    border-radius:22px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.08);
-    backdrop-filter:blur(20px);
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+border-radius:24px;
+padding:24px;
+backdrop-filter:blur(16px);
 }
-
-.number{
-    font-size:52px;
-    font-weight:700;
+.num{font-size:48px;font-weight:700}
+.lab{margin-top:6px;color:#999;text-transform:uppercase;font-size:12px;letter-spacing:2px}
+.note{margin-top:50px;color:#888}
+footer{
+padding:40px;
+text-align:center;
+color:#666;
+border-top:1px solid rgba(255,255,255,.06)
 }
-
-.label{
-    margin-top:8px;
-    color:#8e8e93;
-    text-transform:uppercase;
-    font-size:13px;
-    letter-spacing:2px;
+@media(max-width:720px){
+.countdown{
+grid-template-columns:repeat(2,140px);
 }
-
-.footer{
-    margin-top:70px;
-    color:#6e6e73;
-}
-
-@media(max-width:700px){
-
-h1{
-font-size:52px;
-}
-
-.box{
-width:120px;
-}
-
-.number{
-font-size:42px;
-}
-
-.subtitle{
-font-size:18px;
-}
-
 }
 </style>
-
 </head>
-
 <body>
 
-<div class="glow"></div>
+<div class="bg"><div class="glow"></div></div>
 
-<div class="container">
-
-<div class="badge">
-Geplant für Q4 2026
+<nav>
+<div><strong>WRN</strong></div>
+<div>
+<a href="#">Home</a>
+<a href="#">Projekte</a>
 </div>
+</nav>
+
+<section class="hero">
+<div>
+<div class="badge">Geplant für Q4 2026</div>
 
 <h1>WRN WARN.</h1>
 
-<div class="subtitle">
+<p class="subtitle">
 Die moderne Warn-App für Deutschland.
-</div>
+Offizielle Warnungen für Unwetter, Hochwasser,
+Bevölkerungsschutz und Erdbeben.
+</p>
 
 <div class="countdown">
-
-<div class="box">
-<div class="number" id="days">--</div>
-<div class="label">Tage</div>
+<div class="box"><div class="num" id="days">--</div><div class="lab">Tage</div></div>
+<div class="box"><div class="num" id="hours">--</div><div class="lab">Stunden</div></div>
+<div class="box"><div class="num" id="minutes">--</div><div class="lab">Minuten</div></div>
+<div class="box"><div class="num" id="seconds">--</div><div class="lab">Sekunden</div></div>
 </div>
 
-<div class="box">
-<div class="number" id="hours">--</div>
-<div class="label">Stunden</div>
+<p class="note" id="status">Countdown wird geladen …</p>
 </div>
+</section>
 
-<div class="box">
-<div class="number" id="minutes">--</div>
-<div class="label">Minuten</div>
-</div>
-
-<div class="box">
-<div class="number" id="seconds">--</div>
-<div class="label">Sekunden</div>
-</div>
-
-</div>
-
-<div class="footer">
-© 2026 WRN. Alle Rechte vorbehalten.
-</div>
-
-</div>
+<footer>© 2026 WRN. Alle Rechte vorbehalten.</footer>
 
 <script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-analytics.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 const firebaseConfig = {
-
-apiKey: "DEINE_API_KEY",
-
-authDomain: "DEIN_PROJEKT.firebaseapp.com",
-
-projectId: "DEIN_PROJEKT",
-
-storageBucket: "DEIN_PROJEKT.appspot.com",
-
-messagingSenderId: "123456789",
-
-appId: "DEINE_APP_ID"
-
+  apiKey: "AIzaSyDcTSv_WWwkarezW45kmy74xBChGHaOMHc",
+  authDomain: "wrn-warn.firebaseapp.com",
+  projectId: "wrn-warn",
+  storageBucket: "wrn-warn.firebasestorage.app",
+  messagingSenderId: "307358512846",
+  appId: "1:307358512846:web:5d5339fa016a719649029f",
+  measurementId: "G-WV3M3D5TT1"
 };
 
 const app = initializeApp(firebaseConfig);
+getAnalytics(app);
 const db = getFirestore(app);
 
-let releaseDate;
+let releaseDate=null;
 
 async function loadCountdown(){
-
-const snapshot = await getDoc(doc(db,"website","countdown"));
-
-if(snapshot.exists()){
-
-releaseDate = snapshot.data().releaseDate.toDate();
-
-startCountdown();
-
-}else{
-
-console.log("Countdown nicht gefunden.");
-
+  try{
+    const snap = await getDoc(doc(db,"website","countdown"));
+    if(!snap.exists()){
+      document.getElementById("status").textContent="Firestore-Dokument website/countdown nicht gefunden.";
+      return;
+    }
+    const data=snap.data();
+    if(!data.releaseDate){
+      document.getElementById("status").textContent="Feld releaseDate fehlt.";
+      return;
+    }
+    releaseDate=data.releaseDate.toDate();
+    document.getElementById("status").textContent="Veröffentlichung geplant für Q4 2026";
+    update();
+    setInterval(update,1000);
+  }catch(e){
+    console.error(e);
+    document.getElementById("status").textContent="Fehler beim Laden aus Firestore.";
+  }
 }
 
-}
+function update(){
+  const diff=releaseDate-new Date();
+  if(diff<=0){
+    document.getElementById("days").textContent="0";
+    document.getElementById("hours").textContent="0";
+    document.getElementById("minutes").textContent="0";
+    document.getElementById("seconds").textContent="0";
+    document.getElementById("status").textContent="Jetzt verfügbar!";
+    return;
+  }
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
 
-function startCountdown(){
-
-setInterval(()=>{
-
-const now = new Date();
-
-const distance = releaseDate-now;
-
-if(distance<=0){
-
-document.getElementById("days").textContent="0";
-document.getElementById("hours").textContent="0";
-document.getElementById("minutes").textContent="0";
-document.getElementById("seconds").textContent="0";
-
-return;
-
-}
-
-const days=Math.floor(distance/(1000*60*60*24));
-const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-const minutes=Math.floor((distance%(1000*60*60))/(1000*60));
-const seconds=Math.floor((distance%(1000*60))/1000);
-
-document.getElementById("days").textContent=days;
-document.getElementById("hours").textContent=hours;
-document.getElementById("minutes").textContent=minutes;
-document.getElementById("seconds").textContent=seconds;
-
-},1000);
-
+  days.textContent=d;
+  hours.textContent=String(h).padStart(2,"0");
+  minutes.textContent=String(m).padStart(2,"0");
+  seconds.textContent=String(s).padStart(2,"0");
 }
 
 loadCountdown();
-
 </script>
 
 </body>

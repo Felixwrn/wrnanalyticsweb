@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>WRN Analytics</title>
+<title>WRN Analytics Downloads</title>
 
 <style>
 *{
@@ -117,6 +117,7 @@ h1{
     color:#2997ff;
     margin-bottom:25px;
     font-weight:500;
+    font-size:18px;
 }
 
 .button{
@@ -160,7 +161,7 @@ h1{
     <h1>Downloads.</h1>
 
     <div class="subtitle">
-        Lade aktuelle Versionen von WRN Analytics herunter.
+        Lade aktuelle Versionen von WRN Analytics herunter.<br>
         Schnell, sicher und direkt von WRN.
     </div>
 
@@ -220,7 +221,7 @@ h1{
     © 2026 WRN. Alle Rechte vorbehalten.
 </div>
 
-<!-- Firebase (MODERN MODULE VERSION) -->
+<!-- Firebase -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
@@ -231,15 +232,13 @@ const firebaseConfig = {
     projectId: "wrn-warn",
     storageBucket: "wrn-warn.firebasestorage.app",
     messagingSenderId: "307358512846",
-    appId: "1:307358512846:web:37a9a198937eef2149029f",
-    measurementId: "G-JKC2BXKMZ4"
+    appId: "1:307358512846:web:37a9a198937eef2149029f"
 };
 
-// Init Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Firestore Version laden
+// 🔥 VERSION AUTO FETCH
 async function loadVersion() {
     try {
         const ref = doc(db, "config", "app");
@@ -249,12 +248,12 @@ async function loadVersion() {
             const version = snap.data().version;
             document.getElementById("versionText").innerText = version;
         } else {
-            document.getElementById("versionText").innerText = "Version 1.0 Beta";
+            document.getElementById("versionText").innerText = "Version nicht gefunden";
         }
 
     } catch (err) {
-        console.error("Firestore error:", err);
-        document.getElementById("versionText").innerText = "Version 1.0 Beta";
+        console.error(err);
+        document.getElementById("versionText").innerText = "Fehler beim Laden";
     }
 }
 

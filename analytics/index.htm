@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>WRN Analytics Downloads</title>
+<title>WRN Analytics</title>
 
 <style>
 *{
@@ -20,7 +20,11 @@ body{
     overflow-x:hidden;
 }
 
-.background{position:fixed;inset:0;z-index:-1;}
+.background{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+}
 
 .glow{
     position:absolute;
@@ -93,9 +97,15 @@ h1{
     border-color:rgba(41,151,255,.4);
 }
 
-.icon{font-size:48px;margin-bottom:20px;}
+.icon{
+    font-size:48px;
+    margin-bottom:20px;
+}
 
-.card h2{font-size:30px;margin-bottom:12px;}
+.card h2{
+    font-size:30px;
+    margin-bottom:12px;
+}
 
 .card p{
     color:#9f9fa6;
@@ -106,6 +116,7 @@ h1{
 .version{
     color:#2997ff;
     margin-bottom:25px;
+    font-weight:500;
 }
 
 .button{
@@ -118,7 +129,9 @@ h1{
     transition:.3s;
 }
 
-.button:hover{background:#2997ff;}
+.button:hover{
+    background:#2997ff;
+}
 
 .footer{
     text-align:center;
@@ -132,11 +145,6 @@ h1{
     .card{padding:25px;}
 }
 </style>
-
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
 </head>
 
 <body>
@@ -163,17 +171,46 @@ h1{
     <div class="card">
 
         <div class="icon">💻</div>
+
         <h2>Windows</h2>
 
         <p>WRN Analytics für Windows 10 und Windows 11.</p>
 
         <div class="version" id="versionText">
-            Lade Version...
+            Version wird geladen...
         </div>
 
         <a href="https://github.com/Felixwrn/wrnanalytics/releases/latest/download/WRN.Analytics.zip" class="button">
             Download
         </a>
+
+    </div>
+
+    <div class="card">
+
+        <div class="icon">🍎</div>
+
+        <h2>macOS</h2>
+
+        <p>Optimiert für Apple Silicon und Intel Macs.</p>
+
+        <div class="version">Coming Soon</div>
+
+        <a href="#" class="button">Bald verfügbar</a>
+
+    </div>
+
+    <div class="card">
+
+        <div class="icon">🐧</div>
+
+        <h2>Linux</h2>
+
+        <p>Unterstützung für Ubuntu und weitere Distributionen.</p>
+
+        <div class="version">Coming Soon</div>
+
+        <a href="#" class="button">Bald verfügbar</a>
 
     </div>
 
@@ -183,37 +220,40 @@ h1{
     © 2026 WRN. Alle Rechte vorbehalten.
 </div>
 
-<script>
-/* ===== FIREBASE CONFIG ===== */
+<!-- Firebase (MODERN MODULE VERSION) -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
 const firebaseConfig = {
-    apiKey: "DEIN_API_KEY",
-    authDomain: "DEIN_PROJECT.firebaseapp.com",
-    projectId: "DEIN_PROJECT_ID"
+    apiKey: "AIzaSyDcTSv_WWwkarezW45kmy74xBChGHaOMHc",
+    authDomain: "wrn-warn.firebaseapp.com",
+    projectId: "wrn-warn",
+    storageBucket: "wrn-warn.firebasestorage.app",
+    messagingSenderId: "307358512846",
+    appId: "1:307358512846:web:37a9a198937eef2149029f",
+    measurementId: "G-JKC2BXKMZ4"
 };
 
-firebase.initializeApp(firebaseConfig);
+// Init Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-const db = firebase.firestore();
-
-/* ===== VERSION AUS FIRESTORE LADEN =====
-   Struktur in Firestore:
-   collection: config
-   document: app
-   field: version
-*/
-
+// Firestore Version laden
 async function loadVersion() {
     try {
-        const doc = await db.collection("config").doc("app").get();
+        const ref = doc(db, "config", "app");
+        const snap = await getDoc(ref);
 
-        if (doc.exists) {
-            const version = doc.data().version;
+        if (snap.exists()) {
+            const version = snap.data().version;
             document.getElementById("versionText").innerText = version;
         } else {
             document.getElementById("versionText").innerText = "Version 1.0 Beta";
         }
 
-    } catch (error) {
+    } catch (err) {
+        console.error("Firestore error:", err);
         document.getElementById("versionText").innerText = "Version 1.0 Beta";
     }
 }

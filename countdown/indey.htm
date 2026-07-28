@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Countdown</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0f172a,#1e293b,#020617);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+}
+
+.container{
+    text-align:center;
+}
+
+h1{
+    font-size:3rem;
+    margin-bottom:40px;
+}
+
+.countdown{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.box{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:20px;
+    backdrop-filter:blur(12px);
+    padding:25px;
+    min-width:140px;
+}
+
+.value{
+    font-size:3rem;
+    font-weight:bold;
+}
+
+.label{
+    margin-top:10px;
+    font-size:1rem;
+    color:#cbd5e1;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>Countdown</h1>
+
+<div class="countdown">
+
+<div class="box">
+<div class="value" id="days">0</div>
+<div class="label">Tage</div>
+</div>
+
+<div class="box">
+<div class="value" id="hours">0</div>
+<div class="label">Stunden</div>
+</div>
+
+<div class="box">
+<div class="value" id="minutes">0</div>
+<div class="label">Minuten</div>
+</div>
+
+<div class="box">
+<div class="value" id="seconds">0</div>
+<div class="label">Sekunden</div>
+</div>
+
+<div class="box">
+<div class="value" id="milliseconds">000</div>
+<div class="label">Millisekunden</div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const targetDate = new Date("2026-07-31T15:13:00").getTime();
+
+function updateCountdown(){
+
+    const now = Date.now();
+    let distance = targetDate - now;
+
+    if(distance <= 0){
+        document.body.innerHTML="<h1 style='color:white;'>🎉 Zeit erreicht!</h1>";
+        return;
+    }
+
+    const days = Math.floor(distance / (1000*60*60*24));
+    distance %= (1000*60*60*24);
+
+    const hours = Math.floor(distance / (1000*60*60));
+    distance %= (1000*60*60);
+
+    const minutes = Math.floor(distance / (1000*60));
+    distance %= (1000*60);
+
+    const seconds = Math.floor(distance / 1000);
+
+    const milliseconds = distance % 1000;
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours.toString().padStart(2,"0");
+    document.getElementById("minutes").textContent = minutes.toString().padStart(2,"0");
+    document.getElementById("seconds").textContent = seconds.toString().padStart(2,"0");
+    document.getElementById("milliseconds").textContent = milliseconds.toString().padStart(3,"0");
+
+}
+
+setInterval(updateCountdown,10);
+updateCountdown();
+
+</script>
+
+</body>
+</html>

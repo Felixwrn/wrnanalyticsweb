@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Countdown</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:linear-gradient(135deg,#0f172a,#1e293b,#020617);color:#fff;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+.container{max-width:1200px;width:100%;text-align:center}
+h1{margin-bottom:25px;font-size:2.5rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px}
+.box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:18px;backdrop-filter:blur(12px);padding:20px}
+.value{font-size:2rem;font-weight:bold;word-break:break-word}
+.label{margin-top:10px;color:#cbd5e1}
+#heart{font-size:72px;margin-top:30px;display:inline-block;transition:.12s}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Countdown bis 31.07.2026 15:13 Uhr</h1>
+<div class="grid">
+<div class="box"><div class="value" id="days">0</div><div class="label">Tage</div></div>
+<div class="box"><div class="value" id="hours">00</div><div class="label">Stunden</div></div>
+<div class="box"><div class="value" id="minutes">00</div><div class="label">Minuten</div></div>
+<div class="box"><div class="value" id="seconds">00</div><div class="label">Sekunden</div></div>
+<div class="box"><div class="value" id="milliseconds">000</div><div class="label">Millisekunden</div></div>
+<div class="box"><div class="value" id="heartbeats">0</div><div class="label">❤️ Herzschläge übrig (Ø103 BPM)</div></div>
+</div>
+<div id="heart">❤️</div>
+</div>
+<script>
+const targetDate=new Date("2026-07-31T15:13:00").getTime();
+const bpm=103;
+const beatInterval=60000/bpm;
+const daysEl=document.getElementById("days");
+const hoursEl=document.getElementById("hours");
+const minutesEl=document.getElementById("minutes");
+const secondsEl=document.getElementById("seconds");
+const millisecondsEl=document.getElementById("milliseconds");
+const heartbeatsEl=document.getElementById("heartbeats");
+
+function updateCountdown(){
+ const now=Date.now();
+ let distance=targetDate-now;
+ if(distance<=0){document.body.innerHTML="<h1>🎉 Zeit erreicht!</h1>";return;}
+ let rest=distance;
+ const days=Math.floor(rest/86400000);rest%=86400000;
+ const hours=Math.floor(rest/3600000);rest%=3600000;
+ const minutes=Math.floor(rest/60000);rest%=60000;
+ const seconds=Math.floor(rest/1000);
+ const milliseconds=rest%1000;
+ const remainingHeartbeats=Math.floor((distance/60000)*bpm);
+
+ daysEl.textContent=days;
+ hoursEl.textContent=String(hours).padStart(2,"0");
+ minutesEl.textContent=String(minutes).padStart(2,"0");
+ secondsEl.textContent=String(seconds).padStart(2,"0");
+ millisecondsEl.textContent=String(milliseconds).padStart(3,"0");
+ heartbeatsEl.textContent=remainingHeartbeats.toLocaleString("de-DE");
+ requestAnimationFrame(updateCountdown);
+}
+setInterval(()=>{
+ const h=document.getElementById("heart");
+ h.style.transform="scale(1.18)";
+ setTimeout(()=>h.style.transform="scale(1)",120);
+},beatInterval);
+updateCountdown();
+</script>
+</body>
+</html>
